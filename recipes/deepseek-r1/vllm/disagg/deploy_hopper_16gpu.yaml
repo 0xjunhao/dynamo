@@ -31,13 +31,13 @@ spec:
       componentType: worker
       subComponentType: decode
       replicas: 1
-      multinode:
-        nodeCount: 2
+      # multinode:
+      #  nodeCount: 2
       resources:
         limits:
-          gpu: "8"
-          custom:
-            rdma/ib: "8"
+          gpu: "2"
+          # custom:
+          #  rdma/ib: "8"
       volumeMounts:
         - name: model-cache
           mountPoint: /model-cache
@@ -73,7 +73,7 @@ spec:
             - dynamo.vllm
           args:
             - --model
-            - /model-cache/deepseek-r1
+            - /model-cache/deepseek-r1-pruned-50b
             - --served-model-name
             - deepseek-ai/DeepSeek-R1
             - --all2all-backend
@@ -82,7 +82,7 @@ spec:
             - --tensor-parallel-size
             - "1"
             - --data-parallel-size
-            - "16"
+            - "2"
             - --enable-expert-parallel
             - --max-model-len
             - "16384"
@@ -92,7 +92,7 @@ spec:
             - --async-scheduling
             - --enable-eplb
             - --eplb-config
-            - '{"window_size":"1000","step_interval":"3000","num_redundant_experts":"32","log_balancedness":"False"}'
+            - '{"window_size":"1000","step_interval":"3000","num_redundant_experts":"8","log_balancedness":"False"}'
             - --max-num-seqs
             - "512"
             - --compilation_config
@@ -101,13 +101,13 @@ spec:
       componentType: worker
       subComponentType: prefill
       replicas: 1
-      multinode:
-        nodeCount: 2
+      # multinode:
+      #  nodeCount: 2
       resources:
         limits:
-          gpu: "8"
-          custom:
-            rdma/ib: "8"
+          gpu: "2"
+          # custom:
+          #  rdma/ib: "8"
       volumeMounts:
         - name: model-cache
           mountPoint: /model-cache
@@ -141,7 +141,7 @@ spec:
             - dynamo.vllm
           args:
             - --model
-            - /model-cache/deepseek-r1
+            - /model-cache/deepseek-r1-pruned-50b
             - --is-prefill-worker
             - --served-model-name
             - deepseek-ai/DeepSeek-R1
@@ -151,7 +151,7 @@ spec:
             - --tensor-parallel-size
             - "1"
             - --data-parallel-size
-            - "16"
+            - "2"
             - --enable-expert-parallel
             - --max-model-len
             - "16384"
@@ -161,6 +161,6 @@ spec:
             - --async-scheduling
             - --enable-eplb
             - --eplb-config
-            - '{"window_size":"1000","step_interval":"3000","num_redundant_experts":"32","log_balancedness":"False"}'
+            - '{"window_size":"1000","step_interval":"3000","num_redundant_experts":"8","log_balancedness":"False"}'
             - --max-num-seqs
             - "512"

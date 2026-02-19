@@ -26,8 +26,9 @@ spec:
             - |
               set -eux
               pip install --no-cache-dir huggingface_hub hf_transfer
-              hf download nvidia/DeepSeek-R1-FP4 --local-dir /model-cache/deepseek-r1-fp4
-              hf download deepseek-ai/DeepSeek-R1 --local-dir /model-cache/deepseek-r1
+              hf download ubicloud/DeepSeek-R1-Pruned-50B --local-dir /model-cache/deepseek-r1-pruned-50b
+              # hf download nvidia/DeepSeek-R1-FP4 --local-dir /model-cache/deepseek-r1-fp4
+              # hf download deepseek-ai/DeepSeek-R1 --local-dir /model-cache/deepseek-r1
           volumeMounts:
             - name: model-cache
               mountPath: /model-cache

@@ -9,5 +9,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1500Gi
-  storageClassName: "your-storage-class-name"
+      storage: 100Gi
+  storageClassName: "standard"
