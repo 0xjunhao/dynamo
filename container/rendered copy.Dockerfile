@@ -54,7 +54,7 @@ ARG NIXL_GDRCOPY_REF=v2.5.1
 ARG NIXL_LIBFABRIC_REF=v2.3.0
 
 # Make sure to update the dependency version in pyproject.toml when updating this
-ARG VLLM_REF=c683d11c9
+ARG VLLM_REF=1fe46216
 ARG MAX_JOBS=10
 # FlashInfer only respected when building vLLM from source, ie when VLLM_REF does not start with 'v' or for arm64 builds
 ARG FLASHINF_REF=v0.6.3

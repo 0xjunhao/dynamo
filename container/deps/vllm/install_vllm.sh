@@ -11,8 +11,8 @@
 
 set -euo pipefail
 
-VLLM_VER="0.16.0rc2.dev310+gc683d11c9"
-VLLM_REF="c683d11c9"
+VLLM_VER="0.16.0rc2.dev335+g1fe46216"
+VLLM_REF="1fe46216"
 
 # Basic Configurations
 ARCH=$(uname -m)
@@ -150,10 +150,11 @@ elif [[ "$CUDA_VERSION_MAJOR" == "13" ]]; then
     uv pip install \
         --index-strategy=unsafe-best-match \
         --extra-index-url https://download.pytorch.org/whl/${TORCH_BACKEND} \
-        https://wheels.vllm.ai/c683d11c94655655cd7bf95a27aef7e245325102/vllm-0.16.0rc2.dev310%2Bgc683d11c9.cu130-cp38-abi3-manylinux_2_35_x86_64.whl[flashinfer,runai] \
+        
         --torch-backend=${TORCH_BACKEND}
     uv pip install flashinfer-cubin==$FLASHINF_REF
     uv pip install flashinfer-jit-cache==$FLASHINF_REF --extra-index-url https://flashinfer.ai/whl/${TORCH_BACKEND}
+    # https://wheels.vllm.ai/c683d11c94655655cd7bf95a27aef7e245325102/vllm-0.16.0rc2.dev310%2Bgc683d11c9.cu130-cp38-abi3-manylinux_2_35_x86_64.whl[flashinfer,runai] \
     # https://wheels.vllm.ai/nightly/vllm-0.16.0rc2.dev310+gc683d11c9.cu130-cp38-abi3-manylinux_2_35_x86_64.whl[flashinfer,runai] \
     # https://github.com/vllm-project/vllm/releases/download/v${VLLM_VER}/vllm-${VLLM_VER}+${TORCH_BACKEND}-cp38-abi3-manylinux_2_35_${ALT_ARCH}.whl[flashinfer,runai] \
 else
